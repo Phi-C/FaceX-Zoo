@@ -11,8 +11,9 @@ ext_modules = [
     Extension(
         "render",
         ["render.pyx"],
-        extra_compile_args=['-fopenmp'],
-        extra_link_args=['-fopenmp'],
+        # If platform is MacOS M1, add '-Xpreprocessor' in extra_compile_args and extra_link_args
+        extra_compile_args=['-Xpreprocessor', '-fopenmp'],
+        extra_link_args=['-Xpreprocessor', '-fopenmp'],
     )
 ]
 
