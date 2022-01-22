@@ -13,6 +13,7 @@ import torch
 import numpy as np
 from skimage.io import imread, imsave
 from skimage.transform import estimate_transform, warp
+from tqdm import tqdm
 from utils import read_info
 from model.prnet import PRNet
 from utils.cython.render import render_cy
@@ -120,7 +121,7 @@ class FaceMasker:
         return template_name2ref_texture_src, template_name2uv_mask_src
 
     def add_mask(self, face_root, image_name2lms, image_name2template_name, masked_face_root):
-        for image_name, face_lms in image_name2lms.items():
+        for image_name, face_lms in tqdm(image_name2lms.items()):
             image_path = os.path.join(face_root, image_name)
             masked_face_path = os.path.join(masked_face_root, image_name)
             template_name = image_name2template_name[image_name]
