@@ -99,14 +99,14 @@ def face_detection(data, q):
     else:
         # face_img_root下是各ID文件夹, 图片放在ID文件夹下
         person_ids = os.listdir(face_img_root)
-        for person_id in person_ids:
+        for person_id in person_ids[:10]:
             img_person_root = os.path.join(face_img_root, person_id)
             det_person_root = os.path.join(face_det_root, person_id)
             ali_person_root = os.path.join(face_ali_root, person_id)
             if not os.path.exists(det_person_root):
-                os.mkdir(det_person_root)
+                os.makedirs(det_person_root)
             if not os.path.exists(ali_person_root):
-                os.mkdir(ali_person_root)
+                os.makedirs(ali_person_root)
             detectionCore(img_person_root, det_person_root, ali_person_root)
     q.put(None)
 
@@ -208,7 +208,7 @@ def get_info_file(alignment_root, face_info_file, mask_temp_file):
         # 存在ID目录
         ids = os.listdir(alignment_root)
         for id in ids:
-            get_info_file_core(os.path.join(alignment_root, id))
+            get_info_file_core(os.path.join(alignment_root, id), id)
 
 @calc_execute_time(show_time=True)
 def controller():
@@ -229,4 +229,5 @@ def controller():
 
 
 if __name__ == "__main__":
-    controller() 
+    # controller() 
+    get_info_file('/mnt/e/mnt/datasets/lfw/lfw_ali', '/mnt/e/mnt/datasets/lfw/face_info.txt', '/mnt/e/mnt/datasets/lfw/mask_temp.txt')

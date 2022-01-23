@@ -24,7 +24,7 @@ def get_lms_templateName(face_info_file, image_name2template_name_file, masked_f
     while line:
         line_strs = line.split(' ')
         image_name = line_strs[0]
-        image_lms = line_strs[2].split(',')
+        image_lms = line_strs[1].split(',')
         assert(len(image_lms) == 106 * 2)
         image_lms = [float(num) for num in image_lms]
         image_name2lms[image_name] = image_lms
@@ -46,10 +46,10 @@ def get_lms_templateName(face_info_file, image_name2template_name_file, masked_f
 
 if __name__ == '__main__':
     is_aug = False
-    image_name2template_name_file = '/export2/wangjun492/face_database/facex-zoo/share_file/test_data/megaface/facescrub2template_name.txt'
-    face_root = '/export2/wangjun492/face_database/public_data/general_data/test_data/megaface/facescrub_new'
-    face_info_file = '/export2/wangjun492/face_database/facex-zoo/share_file/test_data/megaface/facescrub_face_info.txt'
-    masked_face_root = 'facescrub_mask'
+    image_name2template_name_file = '/mnt/e/mnt/datasets/lfw/mask_temp.txt'
+    face_root = '/mnt/e/mnt/datasets/lfw/lfw'
+    face_info_file = '/mnt/e/mnt/datasets/lfw/face_info.txt'
+    masked_face_root = '/mnt/e/mnt/datasets/lfw/lfw_mask'
     image_name2lms, image_name2template_name = get_lms_templateName(face_info_file, image_name2template_name_file, masked_face_root)
     face_masker = FaceMasker(is_aug)
     face_masker.add_mask(face_root, image_name2lms, image_name2template_name, masked_face_root)

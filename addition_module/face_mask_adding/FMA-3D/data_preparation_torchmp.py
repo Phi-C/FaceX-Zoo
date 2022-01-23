@@ -225,5 +225,8 @@ def controller():
 
 
 if __name__ == "__main__":
+    # python的multiprocessing中有3种进程的启动方式: spawn、fork和fork server. 查看 
+    # https://docs.python.org/3.10/library/multiprocessing.html#contexts-and-start-methods
+    # 可以了解为什么将spawn设置为进程启动方式可以解决报错：Cannot re-initialize CUDA in forked subprocess. To use CUDA with multiprocessing, you must use the 'spawn' start method
     set_start_method("spawn")
     controller() 
