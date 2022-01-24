@@ -1,4 +1,5 @@
 # 相关论文
+BFM(Basel Face Model)是一个开源的人脸数据库，PRNet使用的3DMM模型就是BFM。关于BFM可以到这个[网站](http://gravis.dmi.unibas.ch/PMM/)进一步了解。
 # 常用环境配置
 ## cv2
 > conda install -c conda-forge opencv

@@ -25,7 +25,9 @@ class PRN:
     """
     def __init__(self, model_path):
         self.resolution = 256
-        self.MaxPos = self.resolution*1.1        
+        self.MaxPos = self.resolution*1.1
+        # face_ind = [43867, ], 存储的是[256, 256]分辨率下人脸区域的像素index, 见FMA-3D/face_ind.png
+        # triangels = [86906, 3]
         self.face_ind = np.loadtxt('Data/uv-data/face_ind.txt').astype(np.int32)
         self.triangles = np.loadtxt('Data/uv-data/triangles.txt').astype(np.int32)
         self.net = PRNet(3, 3)
@@ -177,7 +179,7 @@ class FaceMasker:
             face_lms: face landmarks.
             image:[0, 255]
         """
-        lms_info = read_info.read_landmark_106_array(face_lms)
+        lms_info = read_info.read_landmark_106_array(face_lms)  #106个关键点处理成68个关键点
         pos = self.prn.process(image, lms_info) 
         vertices = self.prn.get_vertices(pos)
         return pos, vertices
